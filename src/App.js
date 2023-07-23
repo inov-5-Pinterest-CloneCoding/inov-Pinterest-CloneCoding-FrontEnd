@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
+import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function getItems(nextGroupKey, count) {
+	const nextItems = [];
+	const nextKey = nextGroupKey * count;
+
+	for (let i = 0; i < count; ++i) {
+		nextItems.push({ groupKey: nextGroupKey, key: nextKey + i });
+	}
+	return nextItems;
 }
 
-export default App;
+const Item = ({ num }) => (
+	<div className='item'>
+		<div className='thumbnail'>
+			<img
+				src={`https://naver.github.io/egjs-infinitegrid/assets/image/${(num % 33) + 1}.jpg`}
+				alt='egjs'
+				style={{
+					maxWidth: "100%",
+					borderRadius: "20px",
+				}}
+			/>
+		</div>
+	</div>
+);
+
+export default function App() {
+	const [items, setItems] = React.useState(() => getItems(0, 10));
+
+	return (
+		<MasonryInfiniteGrid
+			className='container'
+			align='center'
+			gap={10}
+			onRequestAppend={(e) => {
+				const nextGroupKey = (+e.groupKey || 0) + 1;
+
+				setItems([...items, ...getItems(nextGroupKey, 10)]);
+			}}>
+			{items.map((item) => (
+				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
+			))}
+		</MasonryInfiniteGrid>
+	);
+}
