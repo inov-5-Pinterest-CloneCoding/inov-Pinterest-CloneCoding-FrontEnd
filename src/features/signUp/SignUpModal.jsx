@@ -1,7 +1,7 @@
 import * as S from "./style";
 import logo from "../../images/PinterestLogo.png";
 
-export const LoginModal = ({modalState, setModalState}) => {
+export const SignUpModal = ({modalState, setModalState}) => {
     return (
         <div>
             <S.ModalDiv state={modalState}>
