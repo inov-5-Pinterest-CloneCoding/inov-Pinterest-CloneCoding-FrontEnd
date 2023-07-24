@@ -1,7 +1,7 @@
 import * as S from "./style";
 import logo from "../../images/PinterestLogo.png";
 
-export const LoginModal = ({modalState, setModalState}) => {
+export const LoginModal = ({modalState, setModalState, setIsLogin}) => {
     return (
         <div>
             <S.ModalDiv state={modalState}>
@@ -27,7 +27,7 @@ export const LoginModal = ({modalState, setModalState}) => {
                                 <span>비밀번호를 잊으셨나요?</span>
                             </section>
                             <section>
-                                <button>로그인</button>
+                                <button onClick={() => {setIsLogin(true)}}>로그인</button>
                             </section>
                         </form>
                         <div>또는</div>
