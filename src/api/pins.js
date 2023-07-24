@@ -12,7 +12,6 @@ instance.interceptors.request.use((config) => {
 });
 
 export const fetchPins = async () => {
-	let response;
-	await instance.get("/api/file/images").then((res) => (response = res.data.content));
+	const response = await instance.get("/api/file/images");
 	return response;
 };
