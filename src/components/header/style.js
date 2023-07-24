@@ -30,6 +30,7 @@ export const LogoText = styled.div`
 
 export const BtnContainer = styled.div`
     padding: 5px;
+	display: flex;
 `;
 
 export const LoginBtn = styled.button`
@@ -65,4 +66,57 @@ export const SignUpBtn = styled.button`
 		cursor: pointer;
         background-color: #e2e2e2;
     }
+`;
+
+export const MainRightWrapper = styled.div`
+  height: 35.2px;
+	display: flex;
+	align-items: center;
+	padding: 0px 12px;
+`;
+
+export const MainLogoContainer = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
+export const ProfilContainer = styled.div`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  font-weight: bolder;
+  background-color: #f0f0f0;
+`;
+
+export const ProfilModalBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 120%;
+  font-weight: bolder;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  &:active {
+    font-size: 110%;
+  }
 `;
