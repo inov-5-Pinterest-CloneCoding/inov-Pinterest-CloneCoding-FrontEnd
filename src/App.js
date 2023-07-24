@@ -4,7 +4,8 @@ import "./App.css";
 
 // import LoginHeader from "./components/LoginHeader";
 
-import Header from "./components/header/Header";
+// import Header from "./components/header/Header";
+import MainHeader from "./components/MainHeader";
 
 
 function getItems(nextGroupKey, count) {
@@ -36,24 +37,25 @@ export default function App() {
 	const [items, setItems] = React.useState(() => getItems(0, 10));
 	return (
 
-// 		<>
-// 		<LoginHeader />
-// 		<MasonryInfiniteGrid
-// 			className='container'
-// 			align='center'
-// 			gap={10}
-// 			onRequestAppend={(e) => {
-// 				const nextGroupKey = (+e.groupKey || 0) + 1;
+		<>
+		{/* <LoginHeader /> */}
+		<MainHeader />
+		<MasonryInfiniteGrid
+			className='container'
+			align='center'
+			gap={10}
+			onRequestAppend={(e) => {
+				const nextGroupKey = (+e.groupKey || 0) + 1;
 
-// 				setItems([...items, ...getItems(nextGroupKey, 10)]);
-// 			}}>
-// 			{items.map((item) => (
-// 				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
-// 			))}
-// 		</MasonryInfiniteGrid>
-// 		</>
+				setItems([...items, ...getItems(nextGroupKey, 10)]);
+			}}>
+			{items.map((item) => (
+				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
+			))}
+		</MasonryInfiniteGrid>
+		
 
-		<div>
+		{/* <div>
 			<Header />
 			<article>
 				<MasonryInfiniteGrid
@@ -70,7 +72,7 @@ export default function App() {
 					))}
 				</MasonryInfiniteGrid>
 			</article>
-		</div>
-
+		</div> */}
+		</>
 	);
 }
