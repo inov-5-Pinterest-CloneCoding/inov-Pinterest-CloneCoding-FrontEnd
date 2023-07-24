@@ -5,8 +5,8 @@ import { LoginModal } from "../logIn/LoginModal";
 import { SignUpModal } from "../signUp/SignUpModal";
 
 function Header() {
-	const [logInState, setLogInState] = useState(""); // 로그인
-	const [signUpState, setSignUpState] = useState(""); // 가입하기
+	const [logInState, setLogInState] = useState(false); // 로그인
+	const [signUpState, setSignUpState] = useState(false); // 가입하기
 
 	return (
 		<S.HeaderContainer>
