@@ -1,6 +1,7 @@
 import * as React from "react";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import "./App.css";
+import LoginHeader from "./components/LoginHeader";
 
 function getItems(nextGroupKey, count) {
 	const nextItems = [];
@@ -31,6 +32,8 @@ export default function App() {
 	const [items, setItems] = React.useState(() => getItems(0, 10));
 
 	return (
+		<>
+		<LoginHeader />
 		<MasonryInfiniteGrid
 			className='container'
 			align='center'
@@ -44,5 +47,6 @@ export default function App() {
 				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
 			))}
 		</MasonryInfiniteGrid>
+		</>
 	);
 }

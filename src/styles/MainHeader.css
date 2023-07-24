@@ -1,0 +1,5 @@
+.mainHeaderContainer {
+    height: 80;
+    padding: 4px 16px;
+    display: flex;
+}
