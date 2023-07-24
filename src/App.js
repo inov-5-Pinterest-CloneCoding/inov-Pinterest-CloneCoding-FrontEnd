@@ -1,7 +1,11 @@
 import * as React from "react";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import "./App.css";
-import LoginHeader from "./components/LoginHeader";
+
+// import LoginHeader from "./components/LoginHeader";
+
+import Header from "./components/header/Header";
+
 
 function getItems(nextGroupKey, count) {
 	const nextItems = [];
@@ -30,23 +34,43 @@ const Item = ({ num }) => (
 
 export default function App() {
 	const [items, setItems] = React.useState(() => getItems(0, 10));
-
 	return (
-		<>
-		<LoginHeader />
-		<MasonryInfiniteGrid
-			className='container'
-			align='center'
-			gap={10}
-			onRequestAppend={(e) => {
-				const nextGroupKey = (+e.groupKey || 0) + 1;
 
-				setItems([...items, ...getItems(nextGroupKey, 10)]);
-			}}>
-			{items.map((item) => (
-				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
-			))}
-		</MasonryInfiniteGrid>
-		</>
+// 		<>
+// 		<LoginHeader />
+// 		<MasonryInfiniteGrid
+// 			className='container'
+// 			align='center'
+// 			gap={10}
+// 			onRequestAppend={(e) => {
+// 				const nextGroupKey = (+e.groupKey || 0) + 1;
+
+// 				setItems([...items, ...getItems(nextGroupKey, 10)]);
+// 			}}>
+// 			{items.map((item) => (
+// 				<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
+// 			))}
+// 		</MasonryInfiniteGrid>
+// 		</>
+
+		<div>
+			<Header />
+			<article>
+				<MasonryInfiniteGrid
+					className='container'
+					align='center'
+					gap={10}
+					onRequestAppend={(e) => {
+						const nextGroupKey = (+e.groupKey || 0) + 1;
+
+						setItems([...items, ...getItems(nextGroupKey, 10)]);
+					}}>
+					{items.map((item) => (
+						<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
+					))}
+				</MasonryInfiniteGrid>
+			</article>
+		</div>
+
 	);
 }
