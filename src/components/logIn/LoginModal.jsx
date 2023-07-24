@@ -80,3 +80,4 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		</>
 	);
 };
+
