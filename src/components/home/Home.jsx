@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
 import { useQuery } from "react-query";
@@ -36,31 +36,25 @@ const Item = () => {
 function Home() {
 	const [items, setItems] = useState(() => getItems(0, 10));
 
-	const [imageUrls, setImageUrls] = useState(""); // DB 내 이미지 저장 [[{pinImageUrl: "http"}], []...]
+	const [images, setImages] = useState([]); // DB 내 이미지 저장 [[{pinImageUrl: "http"}], []...]
+	const { data: pinList } = useQuery("pins", fetchPins);
 
-	const { data, isLoading, isError } = useQuery("pins", fetchPins);
-	if (isLoading) {
-		return <div></div>;
-	}
+	useEffect(() => {
+		if (pinList) {
+			console.log("data", pinList);
+		}
 
-	if (isError) {
-		return <div>잠시후 다시 시도해주세요.</div>;
-	}
+		// if (data) {
+		// 	let temps = [];
+		// 	data.map((item) => {
+		// 		temps.push(item.pinImageUrl);
+		// 	});
+		// 	// let imgTemps = images;
+		// 	// imgTemps.push(temps);
+		// 	setImages(temps);
+		// }
+	}, [pinList]);
 
-	if (!data) {
-		return <div></div>;
-	} else {
-		setImageUrls();
-	}
-
-	// const [images, setImages] = useState("");
-	// data가 없을 때
-	// if (!data)
-	// 	if (data) {
-	// 		data.map((item) => console.log(item.pinImageUrl));
-	// 	}
-	// // console.log(typeof data);
-	// console.log(typeof []);
 	return (
 		<></>
 		// <MasonryInfiniteGrid
