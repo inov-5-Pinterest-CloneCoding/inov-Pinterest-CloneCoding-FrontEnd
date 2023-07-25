@@ -19,7 +19,7 @@ export const ModalDiv = styled.div`
 	padding: 20px 10px 24px;
 	background-color: white;
 	width: 410px;
-	height: 550px;
+	height: 80%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
