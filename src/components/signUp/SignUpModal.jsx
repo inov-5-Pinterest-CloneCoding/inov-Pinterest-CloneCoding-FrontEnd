@@ -1,16 +1,22 @@
-import * as S from "../ModalStyle";
+import * as L from "../ModalStyle";
 import logo from "../../images/PinterestLogo.png";
 import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
 
-export const SignUpModal = ({ modalState, setModalState }) => {
+export const LoginModal = ({ modalState, setModalState }) => {
+	const kakaoLoginHandler = () => {
+		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
+		const REDIRECT_URI = "http://localhost:3000/kakao/pinterest";
+		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+	};
+
 	return (
 		<>
 			{modalState && (
-				<S.Father>
-					<S.ModalDiv>
-						<S.Contents>
-							<S.BtnContainer>
+				<L.Father>
+					<L.ModalDiv>
+						<L.Contents>
+							<L.BtnContainer>
 								<GrClose
 									size={20}
 									style={{
@@ -21,61 +27,64 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 									}}
 									onClick={() => setModalState(!modalState)}
 								/>
-							</S.BtnContainer>
+							</L.BtnContainer>
 							<div>
-								<S.LogoImg src={logo} alt='logo' />
-								<S.BoldSpan>
+								<L.LogoImg src={logo} alt='logo' />
+								<L.BoldSpan>
 									Pinterest에 오신 것을
 									<br /> 환영합니다
-								</S.BoldSpan>
+								</L.BoldSpan>
 							</div>
 
 							<div>
 								<form>
 									<section>
-										<S.Label>이메일</S.Label>
+										<L.Label>이메일</L.Label>
 										<br />
-										<S.Input type='text' placeholder='  이메일' />
+										<L.Input type='text' placeholder='  이메일' />
 									</section>
 									<section>
-										<S.Label>비밀번호</S.Label>
+										<L.Label>비밀번호</L.Label>
 										<br />
-										<S.Input type='password' placeholder='  비밀번호' />
+										<L.Input type='password' placeholder='  비밀번호' />
 									</section>
 								</form>
 								<section
 									style={{
 										marginBottom: "25px",
 									}}>
-									<S.MediumSpan>비밀번호를 잊으셨나요?</S.MediumSpan>
+									<L.MediumSpan>비밀번호를 잊으셨나요?</L.MediumSpan>
 								</section>
 
 								<section>
-									<S.Button backgroundColor='red'>로그인</S.Button>
+									<L.Button backgroundColor='red'>로그인</L.Button>
 								</section>
 
-								<S.MediumDiv>또는</S.MediumDiv>
+								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
-									<S.Button backgroundColor='rgb(255,204,0)' style={{ position: "relative" }}>
+									<L.Button
+										backgroundColor='rgb(255,204,0)'
+										style={{ position: "relative" }}
+										onClick={kakaoLoginHandler}>
 										<FaComment style={{ position: "absolute", top: "10px", left: "25px" }} />
 										KakaoTalk으로 계속하기
-									</S.Button>
+									</L.Button>
 								</div>
 								<div>
-									<S.Span>
+									<L.Span>
 										계속 진행하면 Pinterest 서비스 약관에 동의하고
 										<br /> 개인정보 보호정책을 읽었음을 인정하는 것으로 간주됩니다.
-									</S.Span>
+									</L.Span>
 								</div>
 							</div>
 							<div>
-								<S.Span>아직 Pinterest를 사용하고 있지 않으신가요? 가입하기</S.Span>
+								<L.Span>아직 Pinterest를 사용하고 있지 않으신가요? 가입하기</L.Span>
 								<br />
-								<S.Span>사업체인가요? 여기에서 시작하세요!</S.Span>
+								<L.Span>사업체인가요? 여기에서 시작하세요!</L.Span>
 							</div>
-						</S.Contents>
-					</S.ModalDiv>
-				</S.Father>
+						</L.Contents>
+					</L.ModalDiv>
+				</L.Father>
 			)}
 		</>
 	);
