@@ -2,10 +2,10 @@ import * as L from "../ModalStyle";
 import logo from "../../images/PinterestLogo.png";
 import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
-
+import { useState } from "react";
 import { useMutation } from "react-query";
 import { signUp } from "../../api/user";
-import { useState } from "react";
+import Validator from "../../hooks/Validator";
 
 export const SignUpModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
@@ -35,17 +35,21 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 			alert('회원 가입이 성공했습니다.');
 			setModalState(!modalState);
 		},
-		onError: (error) => {
-			alert(`회원 가입에 실패했습니다. \n${error.response.data}`);
+		onError: () => {
+			alert(`회원 가입에 실패했습니다. 다시 시도해주세요`);
 		},
 	});
 
 	const onClickSignBtnHandler = () => {
-		signUpMutation.mutate(JSON.stringify({
+		const inputValDict = {
 			email,
 			username,
-			password,
-		}));
+			password
+		}
+
+		const errorMsg = Validator(inputValDict);
+		if (errorMsg.trim() === "") signUpMutation.mutate(JSON.stringify(inputValDict));
+		else alert(errorMsg);
 	};
 
 	return (
@@ -82,6 +86,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										<L.Input
 											type='text'
 											placeholder='  이메일'
+											required
 											name="email"
 											value={email}
 											onChange={onChangeSignHandler}
@@ -94,6 +99,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 											type='text'
 											placeholder='  닉네임'
 											name="username"
+											required
 											value={username}
 											onChange={onChangeSignHandler}
 										/>
@@ -105,6 +111,9 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 											type='password'
 											placeholder='  비밀번호'
 											name="password"
+											required
+											minlength="8"
+											maxlength="15"
 											value={password}
 											onChange={onChangeSignHandler}
 										/>
@@ -122,7 +131,6 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										onClick={onClickSignBtnHandler}
 									>가입하기</L.Button>
 								</section>
-
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
 									<L.Button
