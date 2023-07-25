@@ -33,11 +33,11 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 	const signUpMutation = useMutation(signUp, {
 		onSuccess: () => {
 			alert('회원 가입이 성공했습니다.');
-			setUserInfo("");
-			setModalState(!modalState);
+			closeModal();
 		},
-		onError: () => {
-			alert(`회원 가입에 실패했습니다. 다시 시도해주세요`);
+		onError: (error) => {
+			if (error && error.response) alert(error.response.data.message);
+			else alert("회원 가입에 실패했습니다. 다시 시도해주세요");
 		},
 	});
 
@@ -51,6 +51,11 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 		const errorMsg = Validator(inputValDict);
 		if (errorMsg.trim() === "") signUpMutation.mutate(JSON.stringify(inputValDict));
 		else alert(errorMsg);
+	};
+
+	const closeModal = () => { // 모달 닫기 (input 태그 초기화도 진행)
+		setUserInfo("");
+		setModalState(!modalState);
 	};
 
 	return (
@@ -68,10 +73,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										top: "0px",
 										right: "-60px",
 									}}
-									onClick={() => {
-										setUserInfo("");
-										setModalState(!modalState);
-									}}
+									onClick={() => closeModal()}
 								/>
 							</L.BtnContainer>
 							<div>
@@ -128,7 +130,6 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										marginBottom: "25px",
 									}}>
 								</section>
-
 								<section>
 									<L.Button
 										backgroundColor='red'
