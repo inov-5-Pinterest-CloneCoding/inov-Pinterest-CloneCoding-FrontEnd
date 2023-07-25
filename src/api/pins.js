@@ -11,7 +11,7 @@ instance.interceptors.request.use((config) => {
 	return config;
 });
 
-export const fetchPins = async () => {
-	const response = await instance.get("/api/file/images");
+export const fetchPins = async (pageParam) => {
+	const response = await instance.get(`/api/file/images?page=${pageParam}&size=63`);
 	return response;
 };

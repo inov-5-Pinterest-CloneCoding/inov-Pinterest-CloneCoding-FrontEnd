@@ -10,6 +10,7 @@ export const Father = styled.div`
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
+	z-index:10;
 `;
 
 export const ModalDiv = styled.div`
@@ -24,6 +25,7 @@ export const ModalDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	z-index:10;
 `;
 
 export const Contents = styled.div`
