@@ -15,6 +15,7 @@ export const Container = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0px 12px;
+  cursor: pointer;
 `;
 export const LogoImg = styled.img`
     width: 32px;

@@ -32,7 +32,7 @@ export const Contents = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: center;
-	min-height: 400px;
+	min-height: 70%;
 	justify-content: space-between;
 `;
 
@@ -50,6 +50,10 @@ export const BoldSpan = styled.h2`
 	font-size: 25px;
 	font-weight: bold;
 	margin: 10px 0 10px 0;
+
+	@media screen and (max-width: 768px) {
+		font-size: 20px;
+	}
 `;
 
 export const Input = styled.input`
@@ -58,6 +62,10 @@ export const Input = styled.input`
 	height: 34px;
 	border-radius: 13px;
 	margin-bottom: 10px;
+
+	@media screen and (max-width: 768px) {
+		height: 20px;
+	}
 `;
 
 export const Label = styled.label`
@@ -99,4 +107,11 @@ export const Button = styled.button`
 	background-color: ${(props) => props.backgroundColor};
 	color: rgb(255, 255, 255);
 	width: 100%;
+
+	@media screen and (max-width: 768px) {
+		width: 85%;
+		height: 25px;
+		font-size: 80%;
+		margin-top: 4px;
+	}
 `;
