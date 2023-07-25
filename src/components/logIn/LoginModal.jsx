@@ -13,8 +13,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 	};
 
-	// input 태그 값 (객체 - 이메일, 비밀번호)
-	const [userInfo, setUserInfo] = useState({
+	const [userInfo, setUserInfo] = useState({ // input 태그 값 (객체 - 이메일, 비밀번호)
 		email: "",
 		password: "",
 	});
@@ -28,17 +27,20 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		});
 	};
 
+	const closeModal = () => { // 모달 닫기 (input 태그 초기화도 진행)
+		setUserInfo("");
+		setModalState(!modalState);
+	};
+
 	const loginMutation = useMutation(login, {
 		onSuccess: (res) => {
 			const token = res.headers.authorization; // token 값 가져오기
-			if (!token) { // token 값이 없는 경우
-				alert("로그인 실패!");
-			} else { // token 값이 있는 경우
+			if (!token) alert("로그인 실패!"); // token 값이 없는 경우
+			else { // token 값이 있는 경우
 				document.cookie = `accessToken=${token}; path=/;`; // cookie에 token 저장
 				alert("로그인 성공!");
 			}
-			setUserInfo("");
-			setModalState(!modalState);
+			closeModal();
 		},
 		onError: () => {
 			alert(`로그인 실패!`);
@@ -69,10 +71,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 										top: "0px",
 										right: "-60px",
 									}}
-									onClick={() => {
-										setUserInfo("");
-										setModalState(!modalState);
-									}}
+									onClick={() => closeModal()}
 								/>
 							</L.BtnContainer>
 							<div>
