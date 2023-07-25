@@ -1,10 +1,11 @@
 import React from 'react'
 import * as S from "./style"
 
-function ProfilModal({ infoDict, profilModal, setProfilModal }) {
+function ProfilModal({ infoDict, setProfilModal }) {
   console.log(infoDict)
 
   const handleClickLogOutBtn = () => {
+    console.log("cookie", document.cookie);
         document.cookie = `accessToken=0; max-age=0`;
         setProfilModal(false);
   };
