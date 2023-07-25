@@ -1,7 +1,13 @@
 import React from 'react'
 import * as S from "./style"
 
-function ProfilModal({ profilModal, setProfilModal, setIsLogin }) {
+function ProfilModal({ infoDict, profilModal, setProfilModal }) {
+  console.log(infoDict)
+
+  const handleClickLogOutBtn = () => {
+        document.cookie = `accessToken=0; max-age=0`;
+        setProfilModal(false);
+  };
 
   return (
     <S.BackGround onClick={() => {setProfilModal(false)}}>
@@ -11,17 +17,14 @@ function ProfilModal({ profilModal, setProfilModal, setIsLogin }) {
                 <S.NickNameFirst>이</S.NickNameFirst>
                 <S.ImpoContainer>
                     <S.NickName>닉네임</S.NickName>
-                    <S.Email>이메일</S.Email>
+                    <S.Email>{infoDict.email}</S.Email>
                 </S.ImpoContainer>
             </S.NickNameTitle>
             <S.ModalTitle>내 계정</S.ModalTitle>
-            <S.LogoutBtn onClick={() => {
-                setIsLogin(false)
-                setProfilModal(false)
-                }}>로그아웃하기</S.LogoutBtn>
+            <S.LogoutBtn onClick={handleClickLogOutBtn}>로그아웃하기</S.LogoutBtn>
         </S.ModalBackGround>
     </S.BackGround>
   )
 }
 
-export default ProfilModal
+export default ProfilModal;
