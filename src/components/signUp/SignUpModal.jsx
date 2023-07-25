@@ -3,7 +3,7 @@ import logo from "../../images/PinterestLogo.png";
 import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
 
-export const LoginModal = ({ modalState, setModalState }) => {
+export const SignUpModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
 		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
 		const REDIRECT_URI = "http://localhost:3000/kakao/pinterest";
