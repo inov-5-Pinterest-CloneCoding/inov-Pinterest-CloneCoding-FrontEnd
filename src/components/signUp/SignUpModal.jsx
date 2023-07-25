@@ -3,6 +3,10 @@ import logo from "../../images/PinterestLogo.png";
 import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
 
+import { useMutation } from "react-query";
+import { signUp } from "../../api/user";
+import { useState } from "react";
+
 export const SignUpModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
 		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
@@ -10,8 +14,42 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 	};
 
+	const [userInfo, setUserInfo] = useState({
+		email: "",
+		username: "",
+		password: "",
+	});
+
+	const { email, username, password } = userInfo;
+
+	const onChangeSignHandler = (e) => {
+		const { value, name } = e.target;
+		setUserInfo({
+			...userInfo,
+			[name]: value,
+		});
+	};
+
+	const signUpMutation = useMutation(signUp, {
+		onSuccess: () => {
+			alert('회원 가입이 성공했습니다.');
+			setModalState(!modalState);
+		},
+		onError: (error) => {
+			alert(`회원 가입에 실패했습니다. \n${error.response.data}`);
+		},
+	});
+
+	const onClickSignBtnHandler = () => {
+		signUpMutation.mutate(JSON.stringify({
+			email,
+			username,
+			password,
+		}));
+	};
+
 	return (
-		<>
+		<div>
 			{modalState && (
 				<L.Father>
 					<L.ModalDiv>
@@ -41,23 +79,48 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 									<section>
 										<L.Label>이메일</L.Label>
 										<br />
-										<L.Input type='text' placeholder='  이메일' />
+										<L.Input
+											type='text'
+											placeholder='  이메일'
+											name="email"
+											value={email}
+											onChange={onChangeSignHandler}
+										/>
+									</section>
+									<section>
+										<L.Label>닉네임</L.Label>
+										<br />
+										<L.Input
+											type='text'
+											placeholder='  닉네임'
+											name="username"
+											value={username}
+											onChange={onChangeSignHandler}
+										/>
 									</section>
 									<section>
 										<L.Label>비밀번호</L.Label>
 										<br />
-										<L.Input type='password' placeholder='  비밀번호' />
+										<L.Input
+											type='password'
+											placeholder='  비밀번호'
+											name="password"
+											value={password}
+											onChange={onChangeSignHandler}
+										/>
 									</section>
 								</form>
 								<section
 									style={{
 										marginBottom: "25px",
 									}}>
-									<L.MediumSpan>비밀번호를 잊으셨나요?</L.MediumSpan>
 								</section>
 
 								<section>
-									<L.Button backgroundColor='red'>로그인</L.Button>
+									<L.Button
+										backgroundColor='red'
+										onClick={onClickSignBtnHandler}
+									>가입하기</L.Button>
 								</section>
 
 								<L.MediumDiv>또는</L.MediumDiv>
@@ -86,6 +149,6 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 					</L.ModalDiv>
 				</L.Father>
 			)}
-		</>
+		</div>
 	);
 };
