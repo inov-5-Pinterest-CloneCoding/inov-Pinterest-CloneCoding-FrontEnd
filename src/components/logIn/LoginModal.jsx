@@ -2,12 +2,49 @@ import * as L from "../ModalStyle";
 import logo from "../../images/PinterestLogo.png";
 import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import { login } from "../../api/user";
 
 export const LoginModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
 		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
 		const REDIRECT_URI = "http://localhost:3000/kakao/pinterest";
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+	};
+
+	const [userInfo, setUserInfo] = useState({
+		email: "",
+		password: "",
+	});
+
+	const { email, password } = userInfo;
+
+	const onChangeLoginHandler = (e) => {
+		const { value, name } = e.target;
+		setUserInfo({
+			...userInfo,
+			[name]: value,
+		});
+	};
+
+	const loginMutation = useMutation(login, {
+		onSuccess: () => {
+			alert("로그인 성공!");
+			setModalState(!modalState);
+		},
+		onError: (error) => {
+			alert(`로그인 실패!. \n${error.response.data}`);
+		},
+	});
+
+	const onClickLoginBtnHandler = () => {
+		loginMutation.mutate(
+			JSON.stringify({
+				email,
+				password,
+			})
+		);
 	};
 
 	return (
@@ -41,12 +78,24 @@ export const LoginModal = ({ modalState, setModalState }) => {
 									<section>
 										<L.Label>이메일</L.Label>
 										<br />
-										<L.Input type='text' placeholder='  이메일' />
+										<L.Input
+											type='text'
+											placeholder='  이메일'
+											name='email'
+											value={email}
+											onChange={onChangeLoginHandler}
+										/>
 									</section>
 									<section>
 										<L.Label>비밀번호</L.Label>
 										<br />
-										<L.Input type='password' placeholder='  비밀번호' />
+										<L.Input
+											type='password'
+											placeholder='  비밀번호'
+											name='password'
+											value={password}
+											onChange={onChangeLoginHandler}
+										/>
 									</section>
 								</form>
 								<section
@@ -57,12 +106,17 @@ export const LoginModal = ({ modalState, setModalState }) => {
 								</section>
 
 								<section>
-									<L.Button backgroundColor='red'>로그인</L.Button>
+									<L.Button backgroundColor='red' onClick={onClickLoginBtnHandler}>
+										로그인
+									</L.Button>
 								</section>
 
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
-									<L.Button onClick={kakaoLoginHandler} backgroundColor='rgb(255,204,0)' style={{ position: "relative" }}>
+									<L.Button
+										onClick={kakaoLoginHandler}
+										backgroundColor='rgb(255,204,0)'
+										style={{ position: "relative" }}>
 										<FaComment style={{ position: "absolute", top: "10px", left: "25px" }} />
 										KakaoTalk으로 계속하기
 									</L.Button>
@@ -86,4 +140,3 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		</>
 	);
 };
-
