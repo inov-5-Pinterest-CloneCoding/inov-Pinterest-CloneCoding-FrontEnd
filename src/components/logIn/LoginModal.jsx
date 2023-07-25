@@ -4,6 +4,12 @@ import { GrClose } from "react-icons/gr";
 import { FaComment } from "react-icons/fa";
 
 export const LoginModal = ({ modalState, setModalState }) => {
+	const kakaoLoginHandler = () => {
+		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
+		const REDIRECT_URI = "http://localhost:3000/kakao/pinterest";
+		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+	};
+
 	return (
 		<>
 			{modalState && (
@@ -56,7 +62,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
-									<L.Button backgroundColor='rgb(255,204,0)' style={{ position: "relative" }}>
+									<L.Button onClick={kakaoLoginHandler} backgroundColor='rgb(255,204,0)' style={{ position: "relative" }}>
 										<FaComment style={{ position: "absolute", top: "10px", left: "25px" }} />
 										KakaoTalk으로 계속하기
 									</L.Button>
