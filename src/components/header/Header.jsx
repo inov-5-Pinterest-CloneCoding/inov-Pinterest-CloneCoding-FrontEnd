@@ -9,8 +9,8 @@ function Header() {
 
 	const [logInState, setLogInState] = useState(false); // 로그인
 	const [signUpState, setSignUpState] = useState(false); // 가입하기
-// 	const [isLogin, setIsLogin] = useState(false); // 로그인 조회(로그인 상태 구분)
-// 	const [profilModal, setProfilModal] = useState(false); //프로필 모달창
+ 	const [isLogin, setIsLogin] = useState(false); // 로그인 조회(로그인 상태 구분)
+ 	const [profilModal, setProfilModal] = useState(false); //프로필 모달창
 
 
 	return (

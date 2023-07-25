@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { fetchPins } from "../../api/pins";
 
 import "../home/Home.css";
@@ -16,12 +16,12 @@ function getItems(nextGroupKey, count) {
 	return nextItems;
 }
 
-const Item = () => {
+const Pin = (item) => {
 	return (
 		<div className='item'>
 			<div className='thumbnail'>
 				<img
-					// src={}
+					src={item.url}
 					alt='egjs'
 					style={{
 						maxWidth: "100%",
@@ -34,42 +34,59 @@ const Item = () => {
 };
 
 function Home() {
-	const [items, setItems] = useState(() => getItems(0, 10));
+	// useInfiniteQuery 사용하기
+	const { data, fetchNextPage} =
+    useInfiniteQuery(["pins"], ({pageParam=0}) => fetchPins(pageParam), {
+      getNextPageParam: (lastPage) => {
+		if (!lastPage.last) return lastPage.data.pageable.pageNumber+1;
+		else return undefined;
+      },
+    });
 
-	const [images, setImages] = useState([]); // DB 내 이미지 저장 [[{pinImageUrl: "http"}], []...]
-	const { data: pinList } = useQuery("pins", fetchPins);
+	// 무한 스크롤
+	const [page, setPage] = useState(0);
+	const handleScroll = () => {
+		const scrollHeight = document.documentElement.scrollHeight;
+		const scrollTop = document.documentElement.scrollTop;
+		const clientHeight = document.documentElement.clientHeight;
+	
+		if (scrollTop + clientHeight >= scrollHeight) setPage((prev) => prev + 1);
+	};
 
 	useEffect(() => {
-		if (pinList) {
-			console.log("data", pinList);
-		}
+		fetchNextPage();
+	}, [page]);
 
-		// if (data) {
-		// 	let temps = [];
-		// 	data.map((item) => {
-		// 		temps.push(item.pinImageUrl);
-		// 	});
-		// 	// let imgTemps = images;
-		// 	// imgTemps.push(temps);
-		// 	setImages(temps);
-		// }
-	}, [pinList]);
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+		  window.removeEventListener('scroll', handleScroll);
+		};
+	  }, []);
 
 	return (
-		<></>
-		// <MasonryInfiniteGrid
-		// 	className='container'
-		// 	align='center'
-		// 	gap={10}
-		// 	onRequestAppend={(e) => {
-		// 		const nextGroupKey = (+e.groupKey || 0) + 1;
-
-		// 		setItems([...items, ...getItems(nextGroupKey, 10)]);
-		// 	}}>
-		// 	{/* {data?.map((item) => (
-		// 		<Item data-grid-groupkey={item.groupKey} key={item.key} num={item.key} />
-		// 	))} */}
-		// </MasonryInfiniteGrid>
+		<div>
+			<MasonryInfiniteGrid
+				className='container'
+				align='justify'
+				gap={5}
+				threshold={1000}
+				onRequestAppend={(e) => {
+					e.wait() 
+					getItems(e);
+				}}
+				>
+				{
+					data?.pages.map((page) => {
+						return(
+							page.data.content.map((item) => {
+								return <Pin item={item} key={item.id} gridKey={item.groupKey} num={item.key} url={item.pinImageUrl}/>
+							})
+						)
+					})
+				}
+			</MasonryInfiniteGrid>
+		</div>
 	);
 }
 
