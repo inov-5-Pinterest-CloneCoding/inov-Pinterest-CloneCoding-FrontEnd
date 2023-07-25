@@ -11,8 +11,15 @@ instance.interceptors.request.use((config) => {
 });
 
 export const signUp = async (newUser) => {
-    const response = instance.post(`/api/user/signup`, newUser, {
-        headers: { "Content-Type": "application/json" }
-    });
-    return response;
+	const response = instance.post(`/api/user/signup`, newUser, {
+		headers: { "Content-Type": "application/json" },
+	});
+	return response;
+};
+
+export const login = async (user) => {
+	const response = instance.post(`/api/user/login`, user, {
+		headers: { "Content-Type": "application/json" },
+	});
+	return response;
 };
