@@ -5,8 +5,12 @@ import { LoginModal } from "../logIn/LoginModal";
 import { SignUpModal } from "../signUp/SignUpModal";
 import ProfilModal from "../profil/ProfilModal";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+
+	const navigate = useNavigate();
+
 	const [logInState, setLogInState] = useState(false); // 로그인
 	const [signUpState, setSignUpState] = useState(false); // 가입하기
  	const [profilModal, setProfilModal] = useState(false); //프로필 모달창
@@ -26,36 +30,40 @@ function Header() {
 
 	return (
 		<S.HeaderContainer>
-			<S.Container>
+			<S.Container onClick={() => {navigate('/')}}>
 				<S.LogoImg src={logo} alt='logo' />
 				<S.LogoText>Pinterest</S.LogoText>
 			</S.Container>
 			{
 			(isLogin && currentTime < infoDict.exp)
-			? <S.MainRightWrapper>
-				<S.MainLogoContainer>
-			  		<S.ProfilContainer>이</S.ProfilContainer>
-				</S.MainLogoContainer>
-				<S.ProfilModalBtn
-				onClick={() => {setProfilModal(!profilModal);}}
-				>∨</S.ProfilModalBtn>
-				{
-				(profilModal === true)
-				&& <ProfilModal
-				    infoDict={infoDict}
-					profilModal={profilModal}
-					setProfilModal={setProfilModal}
-					/>
-				}   {/*모달창 띄우기*/}
-			</S.MainRightWrapper>
-			: <>
+			? 
+			<S.MainHeaderContainer>
+				<S.UploadBtn onClick={() => {navigate('/upload')}}>만들기</S.UploadBtn>
+				<S.MainRightWrapper>
+					<S.MainLogoContainer>
+						<S.ProfilContainer>이</S.ProfilContainer>
+					</S.MainLogoContainer>
+					<S.ProfilModalBtn
+					onClick={() => {setProfilModal(!profilModal);}}
+					>∨</S.ProfilModalBtn>
+					{
+					(profilModal === true)
+					&& <ProfilModal
+						infoDict={infoDict}
+						profilModal={profilModal}
+						setProfilModal={setProfilModal}
+						/>
+					}   {/*모달창 띄우기*/}
+				</S.MainRightWrapper>
+			</S.MainHeaderContainer>
+			: <div>
 				<S.BtnContainer state={logInState || signUpState}>
 					<S.LoginBtn onClick={() => setLogInState(true)}>로그인</S.LoginBtn>
 					<S.SignUpBtn onClick={() => setSignUpState(true)}>가입하기</S.SignUpBtn>
 				</S.BtnContainer>
 				<LoginModal modalState={logInState} setModalState={setLogInState} />
 				<SignUpModal modalState={signUpState} setModalState={setSignUpState} />
-			</>
+			</div>
 			}			
 		</S.HeaderContainer>
 	);

@@ -19,13 +19,21 @@ export const ModalDiv = styled.div`
 	padding: 20px 10px 24px;
 	background-color: white;
 	width: 410px;
-	height: 80%;
+	height: 590px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	position: relative;
 	z-index:10;
+
+	@media screen and (max-width: 740px) {
+		height: 540px;
+	}
+
+	@media screen and (max-height: 600px) {
+		height: 100%;
+	}
 `;
 
 export const Contents = styled.div`
@@ -51,7 +59,7 @@ export const BoldSpan = styled.h2`
 	font-weight: bold;
 	margin: 10px 0 10px 0;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 740px) {
 		font-size: 20px;
 	}
 `;
@@ -63,7 +71,7 @@ export const Input = styled.input`
 	border-radius: 13px;
 	margin-bottom: 10px;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 740px) {
 		height: 20px;
 	}
 `;
@@ -108,7 +116,7 @@ export const Button = styled.button`
 	color: rgb(255, 255, 255);
 	width: 100%;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 740px) {
 		width: 85%;
 		height: 25px;
 		font-size: 80%;

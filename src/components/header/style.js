@@ -2,24 +2,27 @@ import { styled } from "styled-components";
 
 export const HeaderContainer = styled.div`
 	width: 100%;
-    height: 55px;
+  height: 55px;
 	padding: 15px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 8888;
 `;
 
 export const Container = styled.div`
-    width: 80%;
 	height: 34px;
 	display: flex;
 	align-items: center;
 	padding: 0px 12px;
-  cursor: pointer;
 `;
 export const LogoImg = styled.img`
     width: 32px;
 	height: 32px;
+  cursor: pointer;
 `;
 
 export const LogoText = styled.div`
@@ -27,6 +30,7 @@ export const LogoText = styled.div`
 	font-weight: bolder;
 	margin-left: 5px;
 	font-size: 120%;
+  cursor: pointer;
 `;
 
 export const BtnContainer = styled.div`
@@ -119,5 +123,26 @@ export const ProfilModalBtn = styled.button`
 
   &:active {
     font-size: 110%;
+  }
+`;
+
+export const MainHeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const UploadBtn = styled.div`
+  font-size: 130%;
+  font-weight: bolder;
+  margin-left: 10px;
+  border-radius: 20px;
+  padding: 8px;
+  border: 3px solid white;
+  cursor: pointer;
+
+  &:active {
+    border: 3px solid #7fc1ff;
   }
 `;
