@@ -33,6 +33,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 	const signUpMutation = useMutation(signUp, {
 		onSuccess: () => {
 			alert('회원 가입이 성공했습니다.');
+			setUserInfo("");
 			setModalState(!modalState);
 		},
 		onError: () => {
@@ -67,7 +68,10 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										top: "0px",
 										right: "-60px",
 									}}
-									onClick={() => setModalState(!modalState)}
+									onClick={() => {
+										setUserInfo("");
+										setModalState(!modalState);
+									}}
 								/>
 							</L.BtnContainer>
 							<div>

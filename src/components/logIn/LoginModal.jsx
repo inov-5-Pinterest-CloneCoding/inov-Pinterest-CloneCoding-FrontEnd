@@ -13,13 +13,13 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 	};
 
+	// input 태그 값 (객체 - 이메일, 비밀번호)
 	const [userInfo, setUserInfo] = useState({
 		email: "",
 		password: "",
 	});
 
 	const { email, password } = userInfo;
-
 	const onChangeLoginHandler = (e) => {
 		const { value, name } = e.target;
 		setUserInfo({
@@ -29,12 +29,19 @@ export const LoginModal = ({ modalState, setModalState }) => {
 	};
 
 	const loginMutation = useMutation(login, {
-		onSuccess: () => {
-			alert("로그인 성공!");
+		onSuccess: (res) => {
+			const token = res.headers.authorization; // token 값 가져오기
+			if (!token) { // token 값이 없는 경우
+				alert("로그인 실패!");
+			} else { // token 값이 있는 경우
+				document.cookie = `accessToken=${token}; path=/;`; // cookie에 token 저장
+				alert("로그인 성공!");
+			}
+			setUserInfo("");
 			setModalState(!modalState);
 		},
-		onError: (error) => {
-			alert(`로그인 실패!. \n${error.response.data}`);
+		onError: () => {
+			alert(`로그인 실패!`);
 		},
 	});
 
@@ -48,7 +55,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 	};
 
 	return (
-		<>
+		<div>
 			{modalState && (
 				<L.Father>
 					<L.ModalDiv>
@@ -62,7 +69,10 @@ export const LoginModal = ({ modalState, setModalState }) => {
 										top: "0px",
 										right: "-60px",
 									}}
-									onClick={() => setModalState(!modalState)}
+									onClick={() => {
+										setUserInfo("");
+										setModalState(!modalState);
+									}}
 								/>
 							</L.BtnContainer>
 							<div>
@@ -72,7 +82,6 @@ export const LoginModal = ({ modalState, setModalState }) => {
 									<br /> 환영합니다
 								</L.BoldSpan>
 							</div>
-
 							<div>
 								<form>
 									<section>
@@ -110,7 +119,6 @@ export const LoginModal = ({ modalState, setModalState }) => {
 										로그인
 									</L.Button>
 								</section>
-
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
 									<L.Button
@@ -137,6 +145,6 @@ export const LoginModal = ({ modalState, setModalState }) => {
 					</L.ModalDiv>
 				</L.Father>
 			)}
-		</>
+		</div>
 	);
 };
