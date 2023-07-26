@@ -6,6 +6,7 @@ import { LoginModal } from "../logIn/LoginModal";
 import { SignUpModal } from "../signUp/SignUpModal";
 import { ProfilModal } from "../profil/ProfilModal";
 import UserInfo from "../../utils/UserInfo";
+import Avatar from "@mui/material/Avatar";
 
 function Header() {
 	const navigate = useNavigate();
@@ -43,12 +44,18 @@ function Header() {
 					</S.UploadBtn>
 					<S.MainRightWrapper>
 						<S.MainLogoContainer>
-							<S.ProfilContainer>{infoDict.username.charAt(0)}</S.ProfilContainer>
+							<S.ProfilContainer>
+								<Avatar>
+									<img src={infoDict.userProfileImage} style={{ width: "30px", height: "30px" }} />
+								</Avatar>
+							</S.ProfilContainer>
 						</S.MainLogoContainer>
 						<S.ProfilModalBtn
 							onClick={() => {
 								setProfilModal(!profilModal);
-							}}></S.ProfilModalBtn>
+							}}>
+							∨
+						</S.ProfilModalBtn>
 						{profilModal === true && (
 							<ProfilModal profilModal={profilModal} setProfilModal={setProfilModal} />
 						)}
