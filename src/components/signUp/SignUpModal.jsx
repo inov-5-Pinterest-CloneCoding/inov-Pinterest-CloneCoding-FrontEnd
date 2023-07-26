@@ -5,7 +5,7 @@ import { FaComment } from "react-icons/fa";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { signUp } from "../../api/user";
-import Validator from "../../hooks/Validator";
+import Validator from "../../utils/Validator";
 
 export const SignUpModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
@@ -32,7 +32,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 
 	const signUpMutation = useMutation(signUp, {
 		onSuccess: () => {
-			alert('회원 가입이 성공했습니다.');
+			alert("회원 가입이 성공했습니다.");
 			closeModal();
 		},
 		onError: (error) => {
@@ -45,15 +45,16 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 		const inputValDict = {
 			email,
 			username,
-			password
-		}
+			password,
+		};
 
 		const errorMsg = Validator(inputValDict);
 		if (errorMsg === "") signUpMutation.mutate(JSON.stringify(inputValDict));
 		else alert(errorMsg);
 	};
 
-	const closeModal = () => { // 모달 닫기 (input 태그 초기화도 진행)
+	const closeModal = () => {
+		// 모달 닫기 (input 태그 초기화도 진행)
 		setUserInfo("");
 		setModalState(!modalState);
 	};
@@ -93,7 +94,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 											type='text'
 											placeholder='  이메일'
 											required
-											name="email"
+											name='email'
 											value={email}
 											onChange={onChangeSignHandler}
 										/>
@@ -104,7 +105,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										<L.Input
 											type='text'
 											placeholder='  닉네임'
-											name="username"
+											name='username'
 											required
 											value={username}
 											onChange={onChangeSignHandler}
@@ -116,7 +117,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										<L.Input
 											type='password'
 											placeholder='  비밀번호'
-											name="password"
+											name='password'
 											value={password}
 											onChange={onChangeSignHandler}
 										/>
@@ -125,13 +126,11 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 								<section
 									style={{
 										marginBottom: "25px",
-									}}>
-								</section>
+									}}></section>
 								<section>
-									<L.Button
-										backgroundColor='red'
-										onClick={onClickSignBtnHandler}
-									>가입하기</L.Button>
+									<L.Button backgroundColor='red' onClick={onClickSignBtnHandler}>
+										가입하기
+									</L.Button>
 								</section>
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
