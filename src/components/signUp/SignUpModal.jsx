@@ -49,7 +49,7 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 		}
 
 		const errorMsg = Validator(inputValDict);
-		if (errorMsg.trim() === "") signUpMutation.mutate(JSON.stringify(inputValDict));
+		if (errorMsg === "") signUpMutation.mutate(JSON.stringify(inputValDict));
 		else alert(errorMsg);
 	};
 
@@ -117,9 +117,6 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 											type='password'
 											placeholder='  비밀번호'
 											name="password"
-											required
-											minlength="8"
-											maxlength="15"
 											value={password}
 											onChange={onChangeSignHandler}
 										/>
