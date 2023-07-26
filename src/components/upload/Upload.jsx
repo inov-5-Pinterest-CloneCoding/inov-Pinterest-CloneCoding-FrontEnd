@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { useCallback, useRef, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { addPins } from "../../api/pins";
@@ -40,10 +40,14 @@ function Upload() {
 	const [thumbnail, setThumbnail] = useState(false); // 썸네일
 
 	const navigate = useNavigate();
+
+	const queryClient = useQueryClient();
+
 	const addMutation = useMutation(addPins, {
 		onSuccess: () => {
 			alert("업로드 성공");
 			navigate("/");
+			queryClient.invalidateQueries("pins");
 		},
 		onError: () => {
 			alert("업로드 실패!");
