@@ -59,7 +59,7 @@ export const Inlabel = styled.label`
 	align-items: center;
 	margin: 20px;
 	border-radius: 20px;
-	width: 100%;
+	width: 500px;
 	height: 80%;
 	background-color: #e9e9e9;
 	border: none;
@@ -81,6 +81,7 @@ export const LabelContainer = styled.div`
 `;
 
 export const LabelText = styled.div`
+	width: 100%;
 	margin-top: 20px;
 	font-size: 120%;
 	font-weight: bold;
@@ -179,21 +180,7 @@ export const UploadBtn = styled.button`
 
 export const UploadImgContainer = styled.img`
 	display: flex;
-	padding: 12px;
-	font-size: 18px;
-	text-overflow: ellipsis;
-	text-align: center;
-	justify-content: center;
-	align-items: center;
-	margin: 20px;
-	border-radius: 20px;
-	width: 100%;
-	height: 100%;
-	background-color: #e9e9e9;
-`;
-
-export const UploadImg = styled.img`
-	display: flex;
+	color: #182251;
 	vertical-align: middle;
 	padding: 12px;
 	font-size: 18px;
@@ -203,9 +190,28 @@ export const UploadImg = styled.img`
 	align-items: center;
 	margin: 20px;
 	border-radius: 20px;
+	width: 500px;
+	height: 80%;
+	background-color: #e9e9e9;
+	border: none;
+	cursor: pointer;
+
+	@media screen and (max-width: 740px) {
+		width: 90%;
+		height: 100%;
+	}
+`;
+
+export const UploadImg = styled.img`
+	display: flex;
+	padding: 12px;
+	font-size: 18px;
+	text-overflow: ellipsis;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
 	width: 60%;
 	height: 80%;
-	border: none;
 	cursor: pointer;
 
 	@media screen and (max-width: 740px) {

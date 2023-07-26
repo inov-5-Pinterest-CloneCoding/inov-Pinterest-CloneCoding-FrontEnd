@@ -1,37 +1,47 @@
 import * as S from "./style";
-import { useState } from "react";
-import { QueryClient, useMutation } from "react-query";
+import { useCallback, useRef, useState } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { addPins } from "../../api/pins";
 import UserInfo from "../../utils/UserInfo";
 import { Avatar } from "@mui/material";
+import { useDropzone } from 'react-dropzone';
 
 function Upload() {
 	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 	const userName = infoDict.username; // 로그인된 사용자 이름
 
-	const [upLoadedImgFile, setUpLoadedImgFile] = useState(""); // 등록한 이미지
-	const [thumbnail, setThumbnail] = useState(false); // 썸네일
-	const handleChangeImgFile = (e) => {
-		if (e.target.files[0]) {
-			// 파일이 있는 경우에만 아래 로직 수행
-			setUpLoadedImgFile(e.target.files[0]);
+	const onDrop = useCallback((acceptedFiles) => {
+		// 파일을 선택하거나 드래그 앤 드롭한 후 실행되는 콜백 함수
 
-			// 미리보기
-			let reader = new FileReader(); // 파일을 읽기 위해 사용
+		if (acceptedFiles.length > 0) {
+			setUpLoadedImgFile(acceptedFiles[0]);
+		
+			let reader = new FileReader();
 			reader.onload = function (e) {
-				setThumbnail(e.target.result); // FileReader로 읽은 파일의 데이터를 넣어줌
+			  setThumbnail(e.target.result);
 			};
-			reader.readAsDataURL(e.target.files[0]); // 파일을 Data URL 형식으로 읽음
-		}
+			reader.readAsDataURL(acceptedFiles[0]);
+		  }
+	  }, []);
+
+	const dropRef = useRef(null);
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+		onDrop,
+		noClick: true,
+	});
+
+	const handleOnClick = () => {
+		dropRef.current.click();
 	};
 
+	const [upLoadedImgFile, setUpLoadedImgFile] = useState(""); // 등록한 이미지
+	const [thumbnail, setThumbnail] = useState(false); // 썸네일
+
 	const navigate = useNavigate();
-	const queryClient = new QueryClient();
 	const addMutation = useMutation(addPins, {
 		onSuccess: () => {
-			queryClient.invalidateQueries("pins");
 			alert("업로드 성공");
 			navigate("/");
 		},
@@ -64,15 +74,23 @@ function Upload() {
 							}}
 						/>
 					) : (
-						<S.Inlabel For='files'>
-							<S.LabelContainer>
-								<FaArrowAltCircleUp style={{ fontSize: "240%" }} />
-								<br />
-								<S.LabelText>사진을 드래그하거나 클릭하여 업로드하세요</S.LabelText>
-							</S.LabelContainer>
-						</S.Inlabel>
+						<div>
+							<div {...getRootProps()} >
+								<S.Inlabel htmlFor='files'>
+									<S.LabelContainer>
+										<FaArrowAltCircleUp style={{ fontSize: "240%" }} onClick={handleOnClick}/>
+										<br />
+										{isDragActive ? (
+											<S.LabelText>사진을 이곳으로 드래그해주세요</S.LabelText>
+										) : (
+											<S.LabelText>사진을 드래그하거나 클릭하여 업로드하세요</S.LabelText>
+										)}
+									</S.LabelContainer>
+								</S.Inlabel>
+							</div>
+							<S.ImgUploadWrapper id='files' {...getInputProps()} ref={dropRef}/>	
+						</div>
 					)}
-					<S.ImgUploadWrapper type='file' id='files' onChange={handleChangeImgFile} />
 					<S.TextInputWrapper>
 						<S.NickNameTitle>
 							<S.NickNameFirst>
