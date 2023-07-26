@@ -1,31 +1,36 @@
-import React from 'react'
-import * as S from "./style"
+import React from "react";
+import * as S from "./style";
+import UserInfo from "../../utils/UserInfo";
 
-function ProfilModal({ infoDict, setProfilModal }) {
-  console.log(infoDict)
+export const ProfilModal = ({ setProfilModal }) => {
+	const handleClickLogOutBtn = () => {
+		document.cookie = `accessToken=0; max-age=0`;
+		setProfilModal(false);
+	};
 
-  const handleClickLogOutBtn = () => {
-    console.log("cookie", document.cookie);
-        document.cookie = `accessToken=0; max-age=0`;
-        setProfilModal(false);
-  };
+	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
+	const userName = infoDict.username;
 
-  return (
-    <S.BackGround onClick={() => {setProfilModal(false)}}>
-        <S.ModalBackGround onClick={(event) => {event.stopPropagation()}}>
-            <S.ModalTitle>현재 로그인 계정</S.ModalTitle>
-            <S.NickNameTitle>
-                <S.NickNameFirst>이</S.NickNameFirst>
-                <S.ImpoContainer>
-                    <S.NickName>{infoDict.username}</S.NickName>
-                    <S.Email>{infoDict.email}</S.Email>
-                </S.ImpoContainer>
-            </S.NickNameTitle>
-            <S.ModalTitle>내 계정</S.ModalTitle>
-            <S.LogoutBtn onClick={handleClickLogOutBtn}>로그아웃하기</S.LogoutBtn>
-        </S.ModalBackGround>
-    </S.BackGround>
-  )
-}
-
-export default ProfilModal;
+	return (
+		<S.BackGround
+			onClick={() => {
+				setProfilModal(false);
+			}}>
+			<S.ModalBackGround
+				onClick={(event) => {
+					event.stopPropagation();
+				}}>
+				<S.ModalTitle>현재 로그인 계정</S.ModalTitle>
+				<S.NickNameTitle>
+					<S.NickNameFirst>{userName.charAt(0)}</S.NickNameFirst>
+					<S.ImpoContainer>
+						<S.NickName>{userName}</S.NickName>
+						<S.Email>{infoDict.email}</S.Email>
+					</S.ImpoContainer>
+				</S.NickNameTitle>
+				<S.ModalTitle>내 계정</S.ModalTitle>
+				<S.LogoutBtn onClick={handleClickLogOutBtn}>로그아웃하기</S.LogoutBtn>
+			</S.ModalBackGround>
+		</S.BackGround>
+	);
+};
