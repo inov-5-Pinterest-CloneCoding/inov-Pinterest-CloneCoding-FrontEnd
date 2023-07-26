@@ -7,6 +7,10 @@ export const BackGround = styled.div`
     left: 0;
     position: fixed;
     z-index: 8888;
+
+    @media screen and (max-width: 360px) {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 `;
 
 export const ModalBackGround = styled.div`
@@ -20,6 +24,15 @@ export const ModalBackGround = styled.div`
     padding: 10px;
     position: fixed;
     z-index: 9999;
+
+    @media screen and (max-width: 360px) {
+        top: 20%;
+        left: 0;
+        width: auto;
+        height: 50%;
+        display: grid;
+        align-items: center;
+    }
 `;
 
 export const ModalTitle = styled.div`
