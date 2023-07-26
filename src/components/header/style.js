@@ -151,3 +151,23 @@ export const UploadBtn = styled.div`
 		font-size: 90%;
 	}
 `;
+
+export const UploadPageBtn = styled.div`
+	font-size: 130%;
+	font-weight: bolder;
+	margin-left: 10px;
+	border-radius: 20px;
+	padding: 8px;
+	border: 3px solid white;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+
+	&:active {
+		border: 3px solid #7fc1ff;
+	}
+
+	@media screen and (max-width: 740px) {
+		font-size: 90%;
+	}
+`;

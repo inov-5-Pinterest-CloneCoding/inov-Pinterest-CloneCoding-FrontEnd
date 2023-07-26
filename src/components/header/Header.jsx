@@ -1,7 +1,7 @@
 import * as S from "./style";
 import logo from "../../images/PinterestLogo.png";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LoginModal } from "../logIn/LoginModal";
 import { SignUpModal } from "../signUp/SignUpModal";
 import { ProfilModal } from "../profil/ProfilModal";
@@ -10,6 +10,8 @@ import Avatar from "@mui/material/Avatar";
 
 function Header() {
 	const navigate = useNavigate();
+
+	const location = useLocation();
 
 	const [logInState, setLogInState] = useState(false); // 로그인
 	const [signUpState, setSignUpState] = useState(false); // 가입하기
@@ -36,12 +38,22 @@ function Header() {
 			</S.Container>
 			{isLogin && currentTime < infoDict.exp ? (
 				<S.MainHeaderContainer>
-					<S.UploadBtn
+					{(location.pathname === "/upload") ? (
+					<S.UploadPageBtn
+						onClick={() => {
+							navigate("/upload");
+						}}>
+						만들기
+					</S.UploadPageBtn>
+					) : (
+						<S.UploadBtn
 						onClick={() => {
 							navigate("/upload");
 						}}>
 						만들기
 					</S.UploadBtn>
+					)
+					}
 					<S.MainRightWrapper>
 						<S.MainLogoContainer>
 							<S.ProfilContainer>
@@ -57,7 +69,7 @@ function Header() {
 							∨
 						</S.ProfilModalBtn>
 						{profilModal === true && (
-							<ProfilModal profilModal={profilModal} setProfilModal={setProfilModal} />
+							<ProfilModal profilModal={profilModal} setProfilModal={setProfilModal} navigate={navigate} />
 						)}
 						{/*모달창 띄우기*/}
 					</S.MainRightWrapper>

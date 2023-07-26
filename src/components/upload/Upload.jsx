@@ -66,13 +66,15 @@ function Upload() {
 			<S.PageContainer>
 				<S.UploadContainer>
 					{thumbnail ? (
-						<S.UploadImg
-							src={thumbnail}
-							onClick={() => {
-								setUpLoadedImgFile("");
-								setThumbnail(false);
-							}}
-						/>
+						<S.UploadImgContainer>
+							<S.UploadImg
+								src={thumbnail}
+								onClick={() => {
+									setUpLoadedImgFile("");
+									setThumbnail(false);
+								}}
+							/>
+						</S.UploadImgContainer>
 					) : (
 						<div>
 							<div {...getRootProps()} >
