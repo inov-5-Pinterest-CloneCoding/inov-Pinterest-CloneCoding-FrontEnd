@@ -145,4 +145,8 @@ export const UploadBtn = styled.div`
   &:active {
     border: 3px solid #7fc1ff;
   }
+
+  @media screen and (max-width: 740px) {
+    font-size: 90%;
+  }
 `;
