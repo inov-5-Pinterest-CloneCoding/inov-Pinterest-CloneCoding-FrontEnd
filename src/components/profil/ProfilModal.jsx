@@ -3,14 +3,17 @@ import * as S from "./style";
 import UserInfo from "../../utils/UserInfo";
 import Avatar from "@mui/material/Avatar";
 
-export const ProfilModal = ({ setProfilModal }) => {
+export const ProfilModal = ({ navigate, setProfilModal }) => {
 	const handleClickLogOutBtn = () => {
 		document.cookie = `accessToken=0; max-age=0`;
+		console.log("info");
 		setProfilModal(false);
+		navigate('/');
 	};
 
 	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 	const userName = infoDict.username;
+	console.log("info", infoDict);
 
 	return (
 		<S.BackGround

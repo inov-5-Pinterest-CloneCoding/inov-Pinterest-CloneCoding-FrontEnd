@@ -178,7 +178,7 @@ export const UploadBtn = styled.button`
 	}
 `;
 
-export const UploadImgContainer = styled.img`
+export const UploadImgContainer = styled.div`
 	display: flex;
 	color: #182251;
 	vertical-align: middle;
@@ -190,10 +190,11 @@ export const UploadImgContainer = styled.img`
 	align-items: center;
 	margin: 20px;
 	border-radius: 20px;
-	width: 500px;
-	height: 80%;
+	width: 63%;
+	height: 550px;
 	background-color: #e9e9e9;
 	border: none;
+	object-fit: contain;
 	cursor: pointer;
 
 	@media screen and (max-width: 740px) {
@@ -210,8 +211,8 @@ export const UploadImg = styled.img`
 	text-align: center;
 	justify-content: center;
 	align-items: center;
-	width: 60%;
-	height: 80%;
+	max-width: 500px;
+  	max-height: 500px;
 	cursor: pointer;
 
 	@media screen and (max-width: 740px) {
