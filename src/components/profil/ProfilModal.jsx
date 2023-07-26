@@ -17,7 +17,7 @@ function ProfilModal({ infoDict, setProfilModal }) {
             <S.NickNameTitle>
                 <S.NickNameFirst>이</S.NickNameFirst>
                 <S.ImpoContainer>
-                    <S.NickName>닉네임</S.NickName>
+                    <S.NickName>{infoDict.username}</S.NickName>
                     <S.Email>{infoDict.email}</S.Email>
                 </S.ImpoContainer>
             </S.NickNameTitle>

@@ -35,10 +35,10 @@ const Pin = (item) => {
 
 function Home() {
 	// useInfiniteQuery 사용하기
-	const { data, fetchNextPage} =
+	const { data, fetchNextPage } =
     useInfiniteQuery(["pins"], ({pageParam=0}) => fetchPins(pageParam), {
       getNextPageParam: (lastPage) => {
-		if (!lastPage.last) return lastPage.data.pageable.pageNumber+1;
+		if (!lastPage.last) return lastPage.data.pageable.pageNumber + 1;
 		else return undefined;
       },
     });
@@ -62,7 +62,7 @@ function Home() {
 		return () => {
 		  window.removeEventListener('scroll', handleScroll);
 		};
-	  }, []);
+	}, []);
 
 	return (
 		<div>
