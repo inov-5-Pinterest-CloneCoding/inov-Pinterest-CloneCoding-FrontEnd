@@ -4,14 +4,20 @@ const instance = axios.create({
 	baseURL: process.env.REACT_APP_SERVER,
 });
 
-//requset가 진행되기전에 실행해줘야 할 것!
 instance.interceptors.request.use((config) => {
 	const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*=\s*([^;]*).*$)|^.*$/, "$1");
 	accessToken && (config.headers.Authorization = accessToken);
 	return config;
 });
 
+// 조회 (페이지 별로)
 export const fetchPins = async (pageParam) => {
 	const response = await instance.get(`/api/file/images?page=${pageParam}&size=63`);
+	return response;
+};
+
+// pin 등록
+export const addPins = async (imageFile) => {
+	const response = await instance.post(`/api/file/pin`, imageFile);
 	return response;
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import UserInfo from "../../utils/UserInfo";
+import Avatar from "@mui/material/Avatar";
 
 export const ProfilModal = ({ setProfilModal }) => {
 	const handleClickLogOutBtn = () => {
@@ -22,7 +23,11 @@ export const ProfilModal = ({ setProfilModal }) => {
 				}}>
 				<S.ModalTitle>현재 로그인 계정</S.ModalTitle>
 				<S.NickNameTitle>
-					<S.NickNameFirst>{userName.charAt(0)}</S.NickNameFirst>
+					<S.NickNameFirst>
+						<Avatar>
+							<img src={infoDict.userProfileImage} style={{ width: "30px", height: "30px" }} />
+						</Avatar>
+					</S.NickNameFirst>
 					<S.ImpoContainer>
 						<S.NickName>{userName}</S.NickName>
 						<S.Email>{infoDict.email}</S.Email>
