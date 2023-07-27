@@ -1,27 +1,25 @@
-import React from "react";
 import * as S from "./style";
 import UserInfo from "../../utils/UserInfo";
 import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 export const ProfilModal = ({ setProfilModal }) => {
-	const handleClickLogOutBtn = () => {
+	const navigate = useNavigate();
+	const handleClickLogOutBtn = () => { // 로그아웃 버튼 선택하면 쿠키에서 토큰 삭제
 		document.cookie = `accessToken=0; max-age=0`;
 		setProfilModal(false);
+		navigate("/");
 	};
 
 	const { infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 	const userName = infoDict.username;
 
-	console.log("infoDict", infoDict);
 	return (
 		<S.BackGround
 			onClick={() => {
 				setProfilModal(false);
 			}}>
-			<S.ModalBackGround
-				onClick={(event) => {
-					event.stopPropagation();
-				}}>
+			<S.ModalBackGround onClick={(event) => { event.stopPropagation(); }}>
 				<S.ModalTitle>현재 로그인 계정</S.ModalTitle>
 				<S.NickNameTitle>
 					<S.NickNameFirst>

@@ -7,7 +7,6 @@ const Redirection = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(process.env.REACT_APP_SERVER);
 		axios.post(`${process.env.REACT_APP_SERVER}/api/user/kakao/login?code=${code}`).then((r) => {
 			document.cookie = `accessToken=${r.headers.authorization}; path=/;`;
 			navigate("/");

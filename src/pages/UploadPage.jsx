@@ -1,5 +1,4 @@
-import React from 'react'
-import Upload from '../components/upload/Upload'
+import Upload from '../components/upload/Upload';
 
 function UploadPage() {
   return (
@@ -7,4 +6,4 @@ function UploadPage() {
   )
 }
 
-export default UploadPage
+export default UploadPage;

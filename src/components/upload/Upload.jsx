@@ -1,12 +1,13 @@
 import * as S from "./style";
-import { useCallback, useRef, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useCallback, useRef, useState, useContext } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { Avatar } from "@mui/material";
+import { useDropzone } from "react-dropzone";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { addPins } from "../../api/pins";
 import UserInfo from "../../utils/UserInfo";
-import { Avatar } from "@mui/material";
-import { useDropzone } from "react-dropzone";
+import { AppContext } from "../../App";
 
 function Upload() {
 	const { infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
@@ -14,7 +15,6 @@ function Upload() {
 
 	const onDrop = useCallback((acceptedFiles) => {
 		// 파일을 선택하거나 드래그 앤 드롭한 후 실행되는 콜백 함수
-
 		if (acceptedFiles.length > 0) {
 			setUpLoadedImgFile(acceptedFiles[0]);
 
@@ -26,28 +26,26 @@ function Upload() {
 		}
 	}, []);
 
-	const dropRef = useRef(null);
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
 		noClick: true,
 	});
 
+	const dropRef = useRef(null);
 	const handleOnClick = () => {
-		dropRef.current.click();
+		dropRef.current.click(); // 이미지 선택창 한번만 띄워주기 위해 ref 변수 사용
 	};
 
 	const [upLoadedImgFile, setUpLoadedImgFile] = useState(""); // 등록한 이미지
-	const [thumbnail, setThumbnail] = useState(false); // 썸네일
+	const [thumbnail, setThumbnail] = useState(false); // 등록한 이미지 썸네일
 
+	const {isUpload, setIsUpload} = useContext(AppContext); // 업로드 유무 저장
 	const navigate = useNavigate();
-
-	const queryClient = useQueryClient();
-
 	const addMutation = useMutation(addPins, {
 		onSuccess: () => {
 			alert("업로드 성공");
+			setIsUpload(!isUpload);
 			navigate("/");
-			queryClient.invalidateQueries("pins");
 		},
 		onError: () => {
 			alert("업로드 실패!");
@@ -55,13 +53,12 @@ function Upload() {
 	});
 
 	const onClickUploadBtnHandler = () => {
-		if (!upLoadedImgFile) {
-			// 무조건 이미지 한 개를 받을 수 있도록 함.
+		if (!upLoadedImgFile) { // 무조건 이미지 한 개를 받을 수 있도록 함.
 			alert("등록된 이미지가 없습니다.\n이미지를 등록해주세요.");
 		} else {
 			const formData = new FormData(); // 생성자 사용하여 FormData 생성
-			formData.append("imageFile", upLoadedImgFile);
-			addMutation.mutate(formData);
+			formData.append("imageFile", upLoadedImgFile); // 등록된 이미지 FormData에 저장
+			addMutation.mutate(formData); // 서버에 이미지 전달
 		}
 	};
 
