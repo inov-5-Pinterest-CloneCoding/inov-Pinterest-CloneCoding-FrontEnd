@@ -9,7 +9,7 @@ import { login } from "../../api/user";
 export const LoginModal = ({ modalState, setModalState }) => {
 	const kakaoLoginHandler = () => {
 		const REST_API_KEY = "675207d8c9b206dd9adb619c2fda7c0d";
-		const REDIRECT_URI = "http://localhost:3000/kakao/pinterest";
+		const REDIRECT_URI = "http://pinterestclonecoding.s3-website.ap-northeast-2.amazonaws.com/kakao/pinterest";
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 	};
 
