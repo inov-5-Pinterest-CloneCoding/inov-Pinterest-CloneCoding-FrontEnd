@@ -6,7 +6,7 @@ function UserInfo() {
 	let isLogin = accessToken ? true : false;
 	const infoDict = accessToken ? jwt_decode(accessToken) : {}; // 현재 로그인된 사용자의 토근 디코딩;
 
-	return [isLogin, infoDict];
+	return { isLogin, infoDict };
 }
 
 export default UserInfo;

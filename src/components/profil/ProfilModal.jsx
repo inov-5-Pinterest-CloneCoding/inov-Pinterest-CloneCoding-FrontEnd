@@ -3,18 +3,16 @@ import * as S from "./style";
 import UserInfo from "../../utils/UserInfo";
 import Avatar from "@mui/material/Avatar";
 
-export const ProfilModal = ({ navigate, setProfilModal }) => {
+export const ProfilModal = ({ setProfilModal }) => {
 	const handleClickLogOutBtn = () => {
 		document.cookie = `accessToken=0; max-age=0`;
-		console.log("info");
 		setProfilModal(false);
-		navigate('/');
 	};
 
-	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
+	const { infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 	const userName = infoDict.username;
-	console.log("info", infoDict);
 
+	console.log("infoDict", infoDict);
 	return (
 		<S.BackGround
 			onClick={() => {
@@ -28,7 +26,11 @@ export const ProfilModal = ({ navigate, setProfilModal }) => {
 				<S.NickNameTitle>
 					<S.NickNameFirst>
 						<Avatar>
-							<img src={infoDict.userProfileImage} style={{ width: "30px", height: "30px" }} />
+							<img
+								src={infoDict.userProfileImage}
+								style={{ width: "30px", height: "30px" }}
+								alt='유저프로필'
+							/>
 						</Avatar>
 					</S.NickNameFirst>
 					<S.ImpoContainer>

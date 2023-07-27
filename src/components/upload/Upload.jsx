@@ -6,10 +6,10 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 import { addPins } from "../../api/pins";
 import UserInfo from "../../utils/UserInfo";
 import { Avatar } from "@mui/material";
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from "react-dropzone";
 
 function Upload() {
-	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
+	const { infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 	const userName = infoDict.username; // 로그인된 사용자 이름
 
 	const onDrop = useCallback((acceptedFiles) => {
@@ -17,17 +17,17 @@ function Upload() {
 
 		if (acceptedFiles.length > 0) {
 			setUpLoadedImgFile(acceptedFiles[0]);
-		
+
 			let reader = new FileReader();
 			reader.onload = function (e) {
-			  setThumbnail(e.target.result);
+				setThumbnail(e.target.result);
 			};
 			reader.readAsDataURL(acceptedFiles[0]);
-		  }
-	  }, []);
+		}
+	}, []);
 
 	const dropRef = useRef(null);
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,
 		noClick: true,
 	});
@@ -81,10 +81,10 @@ function Upload() {
 						</S.UploadImgContainer>
 					) : (
 						<div>
-							<div {...getRootProps()} >
+							<div {...getRootProps()}>
 								<S.Inlabel htmlFor='files'>
 									<S.LabelContainer>
-										<FaArrowAltCircleUp style={{ fontSize: "240%" }} onClick={handleOnClick}/>
+										<FaArrowAltCircleUp style={{ fontSize: "240%" }} onClick={handleOnClick} />
 										<br />
 										{isDragActive ? (
 											<S.LabelText>사진을 이곳으로 드래그해주세요</S.LabelText>
@@ -94,14 +94,18 @@ function Upload() {
 									</S.LabelContainer>
 								</S.Inlabel>
 							</div>
-							<S.ImgUploadWrapper id='files' {...getInputProps()} ref={dropRef}/>	
+							<S.ImgUploadWrapper id='files' {...getInputProps()} ref={dropRef} />
 						</div>
 					)}
 					<S.TextInputWrapper>
 						<S.NickNameTitle>
 							<S.NickNameFirst>
 								<Avatar>
-									<img src={infoDict.userProfileImage} style={{ width: "30px", height: "30px" }} />
+									<img
+										src={infoDict.userProfileImage}
+										style={{ width: "30px", height: "30px" }}
+										alt='유저프로필'
+									/>
 								</Avatar>
 							</S.NickNameFirst>
 							<S.ImpoContainer>

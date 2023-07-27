@@ -17,7 +17,7 @@ function Header() {
 	const [signUpState, setSignUpState] = useState(false); // 가입하기
 	const [profilModal, setProfilModal] = useState(false); //프로필 모달창
 
-	const [isLogin, infoDict] = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
+	let { isLogin, infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
 
 	// 토근이 만료되면 자동 로그아웃
 	const currentTime = Date.now() / 1000; // 현재 시간
@@ -38,27 +38,30 @@ function Header() {
 			</S.Container>
 			{isLogin && currentTime < infoDict.exp ? (
 				<S.MainHeaderContainer>
-					{(location.pathname === "/upload") ? (
-					<S.UploadPageBtn
-						onClick={() => {
-							navigate("/upload");
-						}}>
-						만들기
-					</S.UploadPageBtn>
+					{location.pathname === "/upload" ? (
+						<S.UploadPageBtn
+							onClick={() => {
+								navigate("/upload");
+							}}>
+							만들기
+						</S.UploadPageBtn>
 					) : (
 						<S.UploadBtn
-						onClick={() => {
-							navigate("/upload");
-						}}>
-						만들기
-					</S.UploadBtn>
-					)
-					}
+							onClick={() => {
+								navigate("/upload");
+							}}>
+							만들기
+						</S.UploadBtn>
+					)}
 					<S.MainRightWrapper>
 						<S.MainLogoContainer>
 							<S.ProfilContainer>
 								<Avatar>
-									<img src={infoDict.userProfileImage} style={{ width: "30px", height: "30px" }} />
+									<img
+										src={infoDict.userProfileImage}
+										style={{ width: "30px", height: "30px" }}
+										alt='유저프로필'
+									/>
 								</Avatar>
 							</S.ProfilContainer>
 						</S.MainLogoContainer>
@@ -68,8 +71,12 @@ function Header() {
 							}}>
 							∨
 						</S.ProfilModalBtn>
-						{profilModal === true && (
-							<ProfilModal profilModal={profilModal} setProfilModal={setProfilModal} navigate={navigate} />
+						{profilModal && (
+							<ProfilModal
+								profilModal={profilModal}
+								setProfilModal={setProfilModal}
+								navigate={navigate}
+							/>
 						)}
 						{/*모달창 띄우기*/}
 					</S.MainRightWrapper>
