@@ -147,7 +147,7 @@ export const UploadBtn = styled.div`
 		border: 3px solid #7fc1ff;
 	}
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		font-size: 90%;
 	}
 `;
@@ -167,7 +167,7 @@ export const UploadPageBtn = styled.div`
 		border: 3px solid #7fc1ff;
 	}
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		font-size: 90%;
 	}
 `;

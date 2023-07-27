@@ -30,7 +30,6 @@ function Validator(inputValDict) {
     let errorMsg = "";
     // 이메일
     errorMsg = getErrorMsg("이메일", email, /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/);
-    console.log(errorMsg)
 
     // 닉네임 - 영문(대문자, 소문자), 숫자, 한글만 가능
     if (errorMsg === "") errorMsg = getErrorMsg("닉네임", username, /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]*$/, 4, 10);

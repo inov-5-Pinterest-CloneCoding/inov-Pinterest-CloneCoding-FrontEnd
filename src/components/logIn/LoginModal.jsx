@@ -110,7 +110,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 									<L.MediumSpan>비밀번호를 잊으셨나요?</L.MediumSpan>
 								</section>
 								<section>
-									<L.Button backgroundColor='red' onClick={onClickLoginBtnHandler}>
+									<L.Button $backgroundColor='red' onClick={onClickLoginBtnHandler}>
 										로그인
 									</L.Button>
 								</section>
@@ -118,7 +118,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 								<div>
 									<L.Button
 										onClick={kakaoLoginHandler}
-										backgroundColor='rgb(255,204,0)'
+										$backgroundColor='rgb(255,204,0)'
 										style={{ position: "relative" }}>
 										<FaComment style={{ position: "absolute", top: "10px", left: "25px" }} />
 										KakaoTalk으로 계속하기

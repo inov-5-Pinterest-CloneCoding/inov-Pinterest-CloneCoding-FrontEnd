@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { useCallback, useRef, useState, useContext } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
@@ -7,7 +7,6 @@ import { useDropzone } from "react-dropzone";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { addPins } from "../../api/pins";
 import UserInfo from "../../utils/UserInfo";
-import { AppContext } from "../../App";
 
 function Upload() {
 	const { infoDict } = UserInfo(); // 토큰에서 현재 로그인된 사용자 정보
@@ -39,13 +38,12 @@ function Upload() {
 	const [upLoadedImgFile, setUpLoadedImgFile] = useState(""); // 등록한 이미지
 	const [thumbnail, setThumbnail] = useState(false); // 등록한 이미지 썸네일
 
-	const {isUpload, setIsUpload} = useContext(AppContext); // 업로드 유무 저장
 	const navigate = useNavigate();
 	const addMutation = useMutation(addPins, {
 		onSuccess: () => {
 			alert("업로드 성공");
-			setIsUpload(!isUpload);
 			navigate("/");
+			window.location.reload();
 		},
 		onError: () => {
 			alert("업로드 실패!");
