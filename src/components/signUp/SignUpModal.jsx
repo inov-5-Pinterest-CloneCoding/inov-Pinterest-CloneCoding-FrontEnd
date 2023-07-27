@@ -14,14 +14,15 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 		window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 	};
 
+	// 회원가입에 필요한 정보
 	const [userInfo, setUserInfo] = useState({
 		email: "",
 		username: "",
 		password: "",
 	});
 
+	// 구조분해 할당으로 input 태그에 입력된 정보 저장
 	const { email, username, password } = userInfo;
-
 	const onChangeSignHandler = (e) => {
 		const { value, name } = e.target;
 		setUserInfo({
@@ -48,13 +49,12 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 			password,
 		};
 
-		const errorMsg = Validator(inputValDict);
+		const errorMsg = Validator(inputValDict); // 입력된 정보 유효성 검사 여부 반환
 		if (errorMsg === "") signUpMutation.mutate(JSON.stringify(inputValDict));
 		else alert(errorMsg);
 	};
 
-	const closeModal = () => {
-		// 모달 닫기 (input 태그 초기화도 진행)
+	const closeModal = () => { // 모달 닫기 (input 태그 초기화도 진행)
 		setUserInfo("");
 		setModalState(!modalState);
 	};
@@ -123,14 +123,9 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 										/>
 									</section>
 								</form>
-								<section
-									style={{
-										marginBottom: "25px",
-									}}></section>
+								<section style={{ marginBottom: "25px" }}></section>
 								<section>
-									<L.Button backgroundColor='red' onClick={onClickSignBtnHandler}>
-										가입하기
-									</L.Button>
+									<L.Button backgroundColor='red' onClick={onClickSignBtnHandler}>가입하기</L.Button>
 								</section>
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>

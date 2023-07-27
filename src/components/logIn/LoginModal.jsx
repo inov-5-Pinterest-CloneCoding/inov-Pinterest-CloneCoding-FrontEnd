@@ -17,7 +17,7 @@ export const LoginModal = ({ modalState, setModalState }) => {
 		email: "",
 		password: "",
 	});
-
+	// 구조 분해 할당으로 입력된 정보 저장
 	const { email, password } = userInfo;
 	const onChangeLoginHandler = (e) => {
 		const { value, name } = e.target;
@@ -106,13 +106,9 @@ export const LoginModal = ({ modalState, setModalState }) => {
 										/>
 									</section>
 								</form>
-								<section
-									style={{
-										marginBottom: "25px",
-									}}>
+								<section style={{ marginBottom: "25px" }}>
 									<L.MediumSpan>비밀번호를 잊으셨나요?</L.MediumSpan>
 								</section>
-
 								<section>
 									<L.Button backgroundColor='red' onClick={onClickLoginBtnHandler}>
 										로그인
