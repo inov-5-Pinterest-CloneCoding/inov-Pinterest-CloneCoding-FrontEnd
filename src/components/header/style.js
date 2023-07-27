@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const HeaderContainer = styled.div`
-	width: 100%;
-	height: 55px;
+	width: 98%;
+	height: 40px;
 	padding: 15px;
 	display: flex;
 	justify-content: space-between;
