@@ -65,7 +65,7 @@ function Home() {
 	}, []);
 
 	return (
-		<div>
+		<div className='main'>
 			<MasonryInfiniteGrid
 				className='container'
 				align='justify'

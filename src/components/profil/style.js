@@ -18,8 +18,8 @@ export const ModalBackGround = styled.div`
     max-height: 70%;
     background-color: white;
     border-radius: 20px;
-    top: 80px;
-    right: 0;
+    top: 60px;
+    right: 20px;
     box-shadow: rgba(150, 150, 150, 0.45) 2px 2px 10px;
     padding: 10px;
     position: fixed;
