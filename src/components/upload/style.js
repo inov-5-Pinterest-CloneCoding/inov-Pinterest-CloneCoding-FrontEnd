@@ -21,7 +21,7 @@ export const PageContainer = styled.div`
     justify-content: center;
 	align-items: center;
 
-    @media screen and (max-width: 740px) {
+    @media screen and (max-width: 360px) {
         width: 100%;
 	    height: 100%;
     } */
@@ -38,7 +38,7 @@ export const UploadContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		display: grid;
 		width: 100%;
 		height: 100%;
@@ -65,7 +65,7 @@ export const Inlabel = styled.label`
 	border: none;
 	cursor: pointer;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		width: 90%;
 		height: 100%;
 	}
@@ -111,7 +111,7 @@ export const NickNameTitle = styled.div`
 		font-size: 90%;
 	}
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		margin-top: 0px;
 	}
 `;
@@ -197,7 +197,7 @@ export const UploadImgContainer = styled.div`
 	object-fit: contain;
 	cursor: pointer;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		width: 90%;
 		height: 100%;
 	}
@@ -215,7 +215,7 @@ export const UploadImg = styled.img`
   	max-height: 500px;
 	cursor: pointer;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		width: 90%;
 		height: 100%;
 	}

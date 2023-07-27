@@ -83,7 +83,7 @@ function Header() {
 				</S.MainHeaderContainer>
 			) : (
 				<div>
-					<S.BtnContainer state={logInState || signUpState}>
+					<S.BtnContainer>
 						<S.LoginBtn onClick={() => setLogInState(true)}>로그인</S.LoginBtn>
 						<S.SignUpBtn onClick={() => setSignUpState(true)}>가입하기</S.SignUpBtn>
 					</S.BtnContainer>

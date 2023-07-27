@@ -1,9 +1,8 @@
 import "../home/Home.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
-import { useInfiniteQuery, useQueryClient } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { fetchPins } from "../../api/pins";
-import { AppContext } from "../../App";
 
 function getItems(nextGroupKey, count) {
 	const nextItems = [];
@@ -32,20 +31,13 @@ const Pin = (item) => {
 };
 
 function Home() {
-	const { data, fetchNextPage, refetch } =
+	const { data, fetchNextPage } =
     useInfiniteQuery(["pins"], ({pageParam=0}) => fetchPins(pageParam), {
       getNextPageParam: (lastPage) => {
 		if (!lastPage.last) return lastPage.data.pageable.pageNumber + 1;
 		else return undefined;
       },
     });
-
-	// 업로드 완료되면 화면 렌더링 진행
-	const {isUpload, setIsUpload} = useContext(AppContext);
-	useEffect(()=>{
-		setIsUpload(!isUpload);
-		refetch();
-	}, [isUpload]);
 
 	// 무한 스크롤
 	const [page, setPage] = useState(0);

@@ -125,12 +125,12 @@ export const SignUpModal = ({ modalState, setModalState }) => {
 								</form>
 								<section style={{ marginBottom: "25px" }}></section>
 								<section>
-									<L.Button backgroundColor='red' onClick={onClickSignBtnHandler}>가입하기</L.Button>
+									<L.Button $backgroundColor='red' onClick={onClickSignBtnHandler}>가입하기</L.Button>
 								</section>
 								<L.MediumDiv>또는</L.MediumDiv>
 								<div>
 									<L.Button
-										backgroundColor='rgb(255,204,0)'
+										$backgroundColor='rgb(255,204,0)'
 										style={{ position: "relative" }}
 										onClick={kakaoLoginHandler}>
 										<FaComment style={{ position: "absolute", top: "10px", left: "25px" }} />

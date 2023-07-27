@@ -27,7 +27,7 @@ export const ModalDiv = styled.div`
 	position: relative;
 	z-index:10;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		height: 540px;
 	}
 
@@ -59,7 +59,7 @@ export const BoldSpan = styled.h2`
 	font-weight: bold;
 	margin: 10px 0 10px 0;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		font-size: 20px;
 	}
 `;
@@ -71,7 +71,7 @@ export const Input = styled.input`
 	border-radius: 13px;
 	margin-bottom: 10px;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		height: 20px;
 	}
 `;
@@ -112,11 +112,11 @@ export const Button = styled.button`
 	cursor: pointer;
 	margin-top: 8px;
 	vertical-align: middle;
-	background-color: ${(props) => props.backgroundColor};
+	background-color: ${(props) => props.$backgroundColor};
 	color: rgb(255, 255, 255);
 	width: 100%;
 
-	@media screen and (max-width: 740px) {
+	@media screen and (max-width: 360px) {
 		width: 85%;
 		height: 25px;
 		font-size: 80%;
